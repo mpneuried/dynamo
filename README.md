@@ -1,6 +1,9 @@
 dynamo
 ======
 
+**This is a fork [jed/dynamo](https://github.com/jed/dynamo).**
+**I fixed some issues and added some features to keep it alive, because i'm using it within a bigger project**
+
 [![Build Status](https://secure.travis-ci.org/jed/dynamo.png)][travis]
 
 This is a [node.js][node] binding for the [DynamoDB][dynamo] service provided by [Amazon Web Services][aws]. It aims to abstract DynamoDB's implementation (request signing, session tokens, pagination), but not its tradeoffs/philosophy, by providing two APIs:
@@ -43,7 +46,7 @@ Installation
 
 This library has no dependencies, and can be installed from [npm][npm]:
 
-    npm install dynamo
+    npm install mp-dynamo
 
 API
 ---
@@ -146,3 +149,9 @@ Send any questions or comments [here][twitter].
 [low-api]: https://github.com/jed/dynamo/wiki/Low-level-API
 [high-api]: https://github.com/jed/dynamo/wiki/High-level-API
 [npm]: http://npmjs.org
+
+
+## Release History
+|Version|Date|Description|
+|:--:|:--:|:--|
+|0.2.13|2016-07-5|Use versioning as new npm package `mp-dynamo` to use it within `simple-dynamo`. Fixed Batch load for newer api version|
