@@ -1,0 +1,9 @@
+/test
+/node_modules
+*.sublime*
+config.json
+config*.json
+deploy.json
+.editorconfig
+.travis.yml
+*.env*
