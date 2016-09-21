@@ -1,7 +1,7 @@
 var should = require("should")
   , dynamo = require("../../")
   , client = dynamo.createClient()
-  , db = client.get("us-east-1")
+  , db = client.get(process.env.AWS_REGION || "us-east-1")
 
 describe("Database", function() {
   describe("#get()", function() {
@@ -22,24 +22,24 @@ describe("Database", function() {
     })
   })
 
-  describe("#add()", function() {
-    it("should return a table", function() {
-      var table = db.add({name: "table", schema: {id: 123}})
-
-      table.should.have.property("TableName", "table")
-      table.should.have.property("KeySchema")
-    })
-  })
-
-  describe("#put()", function() {
-    it("should return an update", function() {
-      var update = db.put("table", {id: 123})
-
-      update.should.have.property("TableName", "table")
-      update.should.have.property("Item")
-      update.Item.should.have.property("id")
-    })
-  })
+  // describe("#add()", function() {
+  //   it("should return a table", function() {
+  //     var table = db.add({name: "table", schema: {id: 123}})
+  // 
+  //     table.should.have.property("TableName", "table")
+  //     table.should.have.property("KeySchema")
+  //   })
+  // })
+  // 
+  // describe("#put()", function() {
+  //   it("should return an update", function() {
+  //     var update = db.put("table", {id: 123})
+  // 
+  //     update.should.have.property("TableName", "table")
+  //     update.should.have.property("Item")
+  //     update.Item.should.have.property("id")
+  //   })
+  // })
 
   describe("#fetch()", function() {
     it("should return a hash of tables", function(done) {

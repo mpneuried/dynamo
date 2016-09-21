@@ -2,7 +2,7 @@
   "author": "Jed Schmidt <tr@nslator.jp> (http://jed.is)",
   "name": "mp-dynamo",
   "description": "DynamoDB client for node.js",
-  "version": "0.2.15",
+  "version": "1.0.0",
   "homepage": "https://github.com/jed/dynamo",
   "repository": {
     "type": "git",
@@ -18,9 +18,9 @@
   ],
   "main": "./lib",
   "scripts": {
-    "pretest": "mocha ./test/setup.js",
-    "test": "mocha ./test/tests/*",
-    "posttest": "mocha ./test/teardown.js"
+    "pretest": "export $(cat test.env | grep -v '^#' | xargs) && mocha ./test/setup.js",
+    "test": "export $(cat test.env | grep -v '^#' | xargs) && mocha ./test/tests/*",
+    "posttest": "export $(cat test.env | grep -v '^#' | xargs) && mocha ./test/teardown.js"
   },
   "engines": {
     "node": ">=0.6.0"
@@ -30,7 +30,8 @@
     "should": "*"
   },
   "dependencies": {
-    "type-detect": "1.0.x"
+    "type-detect": "1.0.x",
+    "aws4": "1.4.x"
   },
   "optionalDependencies": {}
 }

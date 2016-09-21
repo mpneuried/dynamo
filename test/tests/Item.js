@@ -1,7 +1,7 @@
 var should = require("should")
   , dynamo = require("../../")
   , client = dynamo.createClient()
-  , db = client.get("us-east-1")
+  , db = client.get(process.env.AWS_REGION || "us-east-1")
 
 describe("Item", function() {
   describe("#fetch", function() {

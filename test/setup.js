@@ -1,7 +1,7 @@
 var should = require("should")
   , dynamo = require("../")
   , client = dynamo.createClient()
-  , db = client.get("us-east-1")
+  , db = client.get(process.env.AWS_REGION || "us-east-1")
 
 describe("setup -", function() {
   
@@ -28,11 +28,16 @@ describe("setup -", function() {
         should.exist(table)
 
         table.should.have.property("TableName", "DYNAMO_TEST_TABLE_1")
-
+        
+        table.should.have.property("AttributeDefinitions")
+        table.AttributeDefinitions.should.have.length(1)
+        table.AttributeDefinitions[0].should.have.property("AttributeName", "id")
+        table.AttributeDefinitions[0].should.have.property("AttributeType", "S")
+        
         table.should.have.property("KeySchema")
-        table.KeySchema.should.have.property("HashKeyElement")
-        table.KeySchema.HashKeyElement.should.have.property("AttributeName", "id")
-        table.KeySchema.HashKeyElement.should.have.property("AttributeType", String)
+        table.KeySchema.KeySchema.should.have.length(1)
+        table.KeySchema.KeySchema[0].should.have.property("AttributeName", "id")
+        table.KeySchema.KeySchema[0].should.have.property("KeyType", "HASH")
 
         table.should.have.property("ProvisionedThroughput")
         table.ProvisionedThroughput.should.have.property("ReadCapacityUnits", 3)
@@ -51,16 +56,22 @@ describe("setup -", function() {
       .save(function(err, table) {
         should.not.exist(err)
         should.exist(table)
-
+        
         table.should.have.property("TableName", "DYNAMO_TEST_TABLE_2")
-
+        
+        table.should.have.property("AttributeDefinitions")
+        table.AttributeDefinitions.should.have.length(2)
+        table.AttributeDefinitions[0].should.have.property("AttributeName", "id")
+        table.AttributeDefinitions[0].should.have.property("AttributeType", "S")
+        table.AttributeDefinitions[1].should.have.property("AttributeName", "date")
+        table.AttributeDefinitions[1].should.have.property("AttributeType", "N")
+        
         table.should.have.property("KeySchema")
-        table.KeySchema.should.have.property("HashKeyElement")
-        table.KeySchema.HashKeyElement.should.have.property("AttributeName", "id")
-        table.KeySchema.HashKeyElement.should.have.property("AttributeType", String)
-        table.KeySchema.should.have.property("RangeKeyElement")
-        table.KeySchema.RangeKeyElement.should.have.property("AttributeName", "date")
-        table.KeySchema.RangeKeyElement.should.have.property("AttributeType", Number)
+        table.KeySchema.KeySchema.should.have.length(2)
+        table.KeySchema.KeySchema[0].should.have.property("AttributeName", "id")
+        table.KeySchema.KeySchema[0].should.have.property("KeyType", "HASH")
+        table.KeySchema.KeySchema[1].should.have.property("AttributeName", "date")
+        table.KeySchema.KeySchema[1].should.have.property("KeyType", "RANGE")
 
         table.should.have.property("ProvisionedThroughput")
         table.ProvisionedThroughput.should.have.property("ReadCapacityUnits", 4)

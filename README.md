@@ -154,4 +154,5 @@ Send any questions or comments [here][twitter].
 ## Release History
 |Version|Date|Description|
 |:--:|:--:|:--|
-|0.2.13|2016-07-5|Use versioning as new npm package `mp-dynamo` to use it within `simple-dynamo`. Fixed Batch load for newer api version|
+|1.0.0|2016-09-21|use module `aws4` to generate the signature. So it's possible to use new regions (like eu-central-1) with Signature Version V4 only.|
+|0.2.13|2016-07-05|Use versioning as new npm package `mp-dynamo` to use it within `simple-dynamo`. Fixed Batch load for newer api version|
